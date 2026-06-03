@@ -8,7 +8,9 @@ agents:
   - import_path: deepcodex_bench.agents:LazyCodexStartWork
     model_name: openai/gpt-5.5
     env:
-      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      CODEX_AUTH_JSON_PATH: ${CODEX_AUTH_JSON_PATH:-}
+      CODEX_FORCE_AUTH_JSON: ${CODEX_FORCE_AUTH_JSON:-false}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
     kwargs:
       reasoning_effort: high
       lazycodex_package: lazycodex-ai@latest

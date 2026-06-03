@@ -29,6 +29,20 @@ Copy the environment template and fill it in:
 cp .env.example .env
 ```
 
+To use your local Codex account login instead of an API key, point Pier at your Codex auth file:
+
+```bash
+CODEX_AUTH_JSON_PATH="$HOME/.codex/auth.json" scripts/run_smoke_10.sh /path/to/deepswe-dataset
+```
+
+Or put this in `.env`:
+
+```bash
+CODEX_AUTH_JSON_PATH=/Users/kenny/.codex/auth.json
+```
+
+Pier copies that file into each sandbox `CODEX_HOME` before `codex exec`, so the trials use the same Codex account auth as your local CLI.
+
 ## Run
 
 Run a small smoke first:
