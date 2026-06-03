@@ -45,6 +45,7 @@ Excluded from headline results:
 ## Reproduction Commands
 
 ```bash
+scripts/run_smoke_10.sh /path/to/deepswe-dataset
 scripts/run_codex_base.sh /path/to/deepswe-dataset
 scripts/run_lazycodex_start_work.sh /path/to/deepswe-dataset
 ```
@@ -53,4 +54,3 @@ scripts/run_lazycodex_start_work.sh /path/to/deepswe-dataset
 
 - Add any failed setup tasks, verifier anomalies, or excluded trials here.
 - Do not merge `$ulw-loop` or `/init-deep` variants into this headline table.
-

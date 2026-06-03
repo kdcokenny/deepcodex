@@ -34,9 +34,10 @@ cp .env.example .env
 Run a small smoke first:
 
 ```bash
-scripts/run_codex_base.sh /path/to/deepswe-dataset --n-tasks 1 --sample-seed 0
-scripts/run_lazycodex_start_work.sh /path/to/deepswe-dataset --n-tasks 1 --sample-seed 0
+scripts/run_smoke_10.sh /path/to/deepswe-dataset
 ```
+
+The smoke runs 10 deterministic tasks per condition. Override the count or seed with `DEEPCODEX_SMOKE_TASKS` and `DEEPCODEX_SMOKE_SEED`.
 
 Run the full configured comparison:
 
@@ -76,4 +77,3 @@ The Pier configs live in [configs/](configs/):
 - [configs/lazycodex-start-work.yaml](configs/lazycodex-start-work.yaml)
 
 Edit the `model_name` and `reasoning_effort` fields in the config files when changing benchmark model settings. Pier resolves environment templates in `agent.env`, but the model and agent kwargs should stay explicit in committed configs for reproducibility.
-
