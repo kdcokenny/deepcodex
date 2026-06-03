@@ -48,3 +48,11 @@ def test_configs_allow_chatgpt_account_auth_egress(tmp_path: Path) -> None:
 
         assert "api.openai.com" in allowlist.domains
         assert "chatgpt.com" in allowlist.domains
+
+
+def test_lazycodex_allows_npm_registry_for_install(tmp_path: Path) -> None:
+    agent = LazyCodexStartWork(logs_dir=tmp_path, model_name="openai/gpt-5.5")
+
+    allowlist = agent.network_allowlist()
+
+    assert "registry.npmjs.org" in allowlist.domains

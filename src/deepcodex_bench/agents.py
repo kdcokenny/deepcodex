@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import logging
 import shlex
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 from pier.agents.installed.codex import Codex
+from pier.models.agent.network import NetworkAllowlist
+from pier.models.task.config import MCPServerConfig
 
 if TYPE_CHECKING:
     from pier.agents.base import AgentContext
@@ -13,14 +17,43 @@ if TYPE_CHECKING:
 class LazyCodexStartWork(Codex):
     def __init__(
         self,
-        *args: object,
+        logs_dir: Path,
+        model_name: str | None = None,
+        logger: logging.Logger | None = None,
+        mcp_servers: list[MCPServerConfig] | None = None,
+        skills_dir: str | None = None,
+        prompt_template_path: Path | str | None = None,
+        version: str | None = None,
+        extra_env: dict[str, str] | None = None,
+        command_model_name: str | None = None,
+        config_toml: str | None = None,
+        config_toml_file: str | None = None,
+        reasoning_effort: str | None = None,
+        reasoning_summary: str | None = None,
         lazycodex_package: str = "lazycodex-ai@latest",
         lazycodex_install_timeout_sec: int = 900,
-        **kwargs: object,
     ) -> None:
-        super().__init__(*args, **kwargs)
+        super().__init__(
+            logs_dir=logs_dir,
+            model_name=model_name,
+            logger=logger,
+            mcp_servers=mcp_servers,
+            skills_dir=skills_dir,
+            prompt_template_path=prompt_template_path,
+            version=version,
+            extra_env=extra_env,
+            command_model_name=command_model_name,
+            config_toml=config_toml,
+            config_toml_file=config_toml_file,
+            reasoning_effort=reasoning_effort,
+            reasoning_summary=reasoning_summary,
+        )
         self._lazycodex_package = lazycodex_package
         self._lazycodex_install_timeout_sec = lazycodex_install_timeout_sec
+
+    def network_allowlist(self) -> NetworkAllowlist:
+        allowlist = super().network_allowlist()
+        return NetworkAllowlist(domains=sorted({*allowlist.domains, "registry.npmjs.org"}))
 
     async def run(
         self,
