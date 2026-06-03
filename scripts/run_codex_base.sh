@@ -12,10 +12,14 @@ fi
 shift
 cd "$ROOT"
 
+ENV_FILE_ARGS=()
+if [[ -f .env ]]; then
+  ENV_FILE_ARGS=(--env-file .env)
+fi
+
 export PYTHONPATH="$ROOT/src${PYTHONPATH:+:$PYTHONPATH}"
 uv run pier run \
   --config configs/codex-base.yaml \
   --path "$DATASET" \
-  --env-file .env \
+  "${ENV_FILE_ARGS[@]}" \
   "$@"
-
