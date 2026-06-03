@@ -43,6 +43,8 @@ CODEX_AUTH_JSON_PATH=/Users/kenny/.codex/auth.json
 
 Pier copies that file into each sandbox `CODEX_HOME` before `codex exec`, so the trials use the same Codex account auth as your local CLI.
 
+The committed configs include an unused `deepcodex_chatgpt_account_allowlist` provider block. It exists so Pier's filtered-egress proxy permits `chatgpt.com` account-auth traffic; it does not change the active Codex model provider.
+
 ## Run
 
 Run a small smoke first:

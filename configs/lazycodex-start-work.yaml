@@ -12,6 +12,12 @@ agents:
       CODEX_FORCE_AUTH_JSON: ${CODEX_FORCE_AUTH_JSON:-false}
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
     kwargs:
+      config_toml: |
+        [model_providers.deepcodex_chatgpt_account_allowlist]
+        name = "ChatGPT account auth allowlist"
+        base_url = "https://chatgpt.com/backend-api/"
+        wire_api = "responses"
+        env_key = "OPENAI_API_KEY"
       reasoning_effort: high
       lazycodex_package: lazycodex-ai@latest
       lazycodex_install_timeout_sec: 900
